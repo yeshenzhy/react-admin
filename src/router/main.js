@@ -15,12 +15,6 @@ const ComponentByLayout = () => (
   </Layout>
 );
 
-const as = () => {
-  const a = false;
-  if (a) {
-    console.log('zz');
-  }
-};
 class MainContent extends React.Component {
   render() {
     return (
