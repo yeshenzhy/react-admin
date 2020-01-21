@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import SlideBar from './SlideBar';
 import { Layout } from 'antd';
+import SlideBar from './SlideBar';
+
 class Index extends Component {
   render() {
     const { children } = this.props;

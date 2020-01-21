@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
-import routes from '../../router/routerMap'
+import routes from '@src/router/routerMap'
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 const createSubMenuComponents = (route, pathname, history) => {
