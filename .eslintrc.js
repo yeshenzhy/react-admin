@@ -1,0 +1,53 @@
+module.exports = {
+  parser: "babel-eslint",
+  extends: "airbnb",
+  plugins: [
+    "react"
+  ],
+  env: {
+    browser: true,
+    node: true,
+    es6: true
+  },
+  rules: {
+    "no-var": 2,
+    "no-console": 0,
+    "no-unused-vars": 0,
+    "import/no-unresolved": 0,
+    "max-len": 0,
+    "no-trailing-spaces": 0,
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
+    "import/prefer-default-export": 0,
+    "class-methods-use-this": 0,
+    "no-multiple-empty-lines": [1, { max: 1 }],
+    "prefer-rest-params": 0,
+    "no-restricted-syntax": 0,
+    "no-shadow": 0,
+    "arrow-parens": 0,
+    "guard-for-in": 0,
+    "no-plusplus": 0,
+    "consistent-return": 0,
+    "no-const-assign": 0,
+    "button-has-type": 0,
+    "no-case-declarations": 0,
+    "react/no-danger": 0,
+    "react/button-has-type": 0,
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/prop-types": 0,
+    "react/destructuring-assignment": 0,
+    "react/sort-comp": 0,
+    "react/prefer-stateless-function": 0,
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "react/no-multi-comp": 0,
+    "react/no-access-state-in-setstate": 0,
+    "react/no-array-index-key": 0,
+    "no-unused-expressions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/no-static-element-interactions": 0
+  }
+};
