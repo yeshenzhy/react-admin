@@ -5,6 +5,7 @@ import SlideBar from './SlideBar';
 class Index extends Component {
   render() {
     const { children } = this.props;
+    console.log(this.props);
     return (
       <div className="layout">
         <Layout style={{ minHeight: '100vh' }}>

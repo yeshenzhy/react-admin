@@ -11,11 +11,20 @@ const asyncComponens = (url) => Loadable({
 const routes = [
   {
     path: '/',
-    component: asyncComponens('home'),
+    component: asyncComponens('Home'),
     name: '首页',
     icon: 'database',
     auth: true,
     layout: true,
+  },
+  {
+    path: '/login',
+    component: asyncComponens('Login'),
+    name: '登录',
+    icon: 'database',
+    auth: true,
+    hidden: true,
+    layout: false
   },
   {
     path: '/knowLedge',
@@ -34,6 +43,27 @@ const routes = [
         path: '/knowLedge/life-cycle',
         component: asyncComponens('KnowLedge/LifeCycle'),
         name: '生命周期',
+        redirect: '/knowLedge/life-cycle/Childpage',
+        children: [
+          {
+            path: '/knowLedge/life-cycle/Childpage',
+            component: asyncComponens('KnowLedge/Childpage'),
+            name: 'Childpage',
+            redirect: '/knowLedge/life-cycle/Childpage/childchild',
+            children: [
+              {
+                path: '/knowLedge/life-cycle/Childpage/childchild',
+                component: asyncComponens('KnowLedge/ChildChild'),
+                name: 'ChildChild'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: '/knowLedge/my-cycle',
+        component: asyncComponens('KnowLedge/MyCycle'),
+        name: '我的',
       }
     ],
   },

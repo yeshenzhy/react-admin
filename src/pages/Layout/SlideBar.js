@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
-import routes from '@src/router/routerMap'
+import routes from '@src/router/routerMap';
+// import connect from '@connect';
+
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 const createSubMenuComponents = (route, pathname, history) => {
@@ -32,7 +34,8 @@ const createSubMenuComponents = (route, pathname, history) => {
     </SubMenu>
   );
 };
-
+// @connect
+@withRouter
 class SlideBar extends Component {
   onOpenChange = (openKeys) => {
     this.props.setOpenKeys([openKeys.pop()]);
@@ -43,20 +46,33 @@ class SlideBar extends Component {
     //   openkeys, breadCrumbs, collapsed, routes,
     // } = this.props.appReducer;
     // const { location: { pathname }, history } = this.props;
+    const menuSelected = this.props.history.location.pathname;
+    const menuOpened = menuSelected.split('/');
+    menuOpened.splice(0, 1);
+    const menuArray = [];
+    menuOpened.forEach((item, index) => {
+      if (index === 0) {
+        menuArray.push(`/${item}`);
+      } else {
+        menuArray.push(`${menuArray[index - 1]}/${item}`);
+      }
+    });
     return (
-      <Sider className="app-sider"
+      <Sider
+        className="app-sider"
         trigger
         collapsed={false}
       >
-        <div className="logo" style={{color: "white"}}>
+        <div className="logo" style={{ color: 'white' }}>
           Logo
         </div>
         <Menu
+
           mode="inline"
           theme="dark"
-          // onOpenChange={this.onOpenChange}
-          // openKeys={openkeys}
-          // selectedKeys={[breadCrumbs[breadCrumbs.length - 1].path]}
+          defaultSelectedKeys={[menuSelected]}
+          selectedKeys={[menuSelected]}
+          defaultOpenKeys={[...menuArray]}
         >
           {
             routes.filter(route => !route.hidden).map((item) => {
