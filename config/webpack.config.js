@@ -90,6 +90,6 @@ const config = {
       '@src': path.resolve(__dirname, '../src'),
     },
   },
-  devtool: 'cheap-module-eval-source-map',
+  
 };
 module.exports = config;
