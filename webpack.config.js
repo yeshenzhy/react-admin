@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js', // 入口文件
   output: {
     path: path.join(__dirname, 'dist'), // 打包后的文件存放的地方 
-    filename: 'index.js', // 打包后输出文件的文件名
+    filename: './js/[name].[hash].js', // 打包后输出文件的文件名
   },
   module: {
     rules: [
@@ -19,31 +20,32 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/, // 正则匹配以.css结尾的文件
-        use: ['style-loader', 'css-loader'], // 需要用的loader，一定是这个顺序，因为调用loader是从右往左编译的
-  
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
+        ],
+        // exclude: /node_modules/,
       },
       {
         test: /\.less$/,
         use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              modifyVars: {
-                // 'primary-color': '#20B2AA',
-                // hack: `true; @import "theme.less";`
-              },
-              javascriptEnabled: true,
-            },
-          },
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
+          { loader: 'less-loader' },
         ],
-
       },
       {
         test: /\.(scss|sass)$/, // 正则匹配以.scss和.sass结尾的文件
-        use: ['style-loader', 'css-loader', 'sass-loader'], // 需要用的loader，一定是这个顺序，因为调用loader是从右往左编译的
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' },
+        ],
+        // exclude: /node_modules/,
 
       },
       {
@@ -72,11 +74,14 @@ module.exports = {
     // }
   },
   plugins: [
-    new webpack.BannerPlugin('夜神丶'), // new一个插件的实例
+    new webpack.BannerPlugin('夜神丶'), // 为每个 chunk 文件头部添加 banner。
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
       inject: true,
+    }),
+    new MiniCssExtractPlugin({
+      filename: './css/[name].[hash].css',
     }),
     new webpack.HotModuleReplacementPlugin(), // 热更新插件 
   ],
@@ -86,6 +91,7 @@ module.exports = {
       '@src': path.join(__dirname, './src'),
     },
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map', // 开发模式建议cheap-module-eval-source-map， 生产模式cheap-module-source-map
+  mode: 'production', // 开发模式development， 生产模式production
 };
 
