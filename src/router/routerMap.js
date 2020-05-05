@@ -41,13 +41,11 @@ const routes = [
       },
       {
         path: '/knowLedge/life-cycle',
-        component: asyncComponens('KnowLedge/LifeCycle'),
         name: '生命周期',
         redirect: '/knowLedge/life-cycle/Childpage',
         children: [
           {
             path: '/knowLedge/life-cycle/Childpage',
-            component: asyncComponens('KnowLedge/Childpage'),
             name: 'Childpage',
             redirect: '/knowLedge/life-cycle/Childpage/childchild',
             children: [

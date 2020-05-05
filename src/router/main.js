@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Layout from '@src/pages/Layout';
 import allRoutes from './routerMap';
 // 路由渲染
@@ -13,11 +13,21 @@ const RouteComponent = route => {
 const renderRouteComponent = routes => routes.map(route => (route.children ? route.children.map(item => RouteComponent(item)) : RouteComponent(route)));
 
 // 带有layout的路由
-const ComponentByLayout = () => (
-  <Layout>
-    {renderRouteComponent(allRoutes.filter(route => route.layout))}
-  </Layout>
-);
+const ComponentByLayout = () => {
+  const isLogged = localStorage.getItem('isLogin') === '1';
+  if (!isLogged) { // 登录过则返回路由否则跳转到登录页
+    return (
+      <Layout>
+        {renderRouteComponent(allRoutes.filter(route => route.layout))}
+      </Layout>
+    );
+  }
+  return (
+    <Layout>
+      <Redirect to="/login" />
+    </Layout>
+  );
+};
 class MainContent extends React.Component {
   render() {
     return (

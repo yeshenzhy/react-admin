@@ -7,7 +7,7 @@ export default class ChildChild extends React.Component {
       <div className="box2">
         <Button type="primary">ChildChild</Button>
         <a href="#/detail">ChildChild</a>
-        <p className="p">我是p标签</p>
+        <p className="p">我是pzz标签</p>
       </div>
     );
   }
