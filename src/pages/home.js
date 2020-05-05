@@ -7,7 +7,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <Button type="primary">Primary</Button>
-        <a href="#/login">去登录页</a>
+        <a href="#/my">去我的页</a>
         <img src={imgURL} alt="" />
       </div>
     );

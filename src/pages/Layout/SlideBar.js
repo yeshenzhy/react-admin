@@ -75,7 +75,7 @@ class SlideBar extends Component {
           defaultOpenKeys={[...menuArray]}
         >
           {
-            routes.filter(route => !route.hidden).map((item) => {
+            routes.filter(route => !route.hidden && route.layout).map((item) => {
               if (!item.children) {
                 return (
                   <Menu.Item key={item.path}>

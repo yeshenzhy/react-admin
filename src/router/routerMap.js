@@ -10,7 +10,7 @@ const asyncComponens = (url) => Loadable({
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     component: asyncComponens('Home'),
     name: '首页',
     icon: 'database',
@@ -38,6 +38,7 @@ const routes = [
         path: '/knowLedge/syntax',
         component: asyncComponens('KnowLedge/Syntax'),
         name: '常用语法',
+        layout: false,
       },
       {
         path: '/knowLedge/life-cycle',
@@ -58,13 +59,14 @@ const routes = [
           }
         ]
       },
-      {
-        path: '/knowLedge/my-cycle',
-        component: asyncComponens('KnowLedge/MyCycle'),
-        name: '我的',
-      }
     ],
   },
+  {
+    path: '/my',
+    component: asyncComponens('KnowLedge/MyCycle'),
+    name: '我的',
+    layout: false
+  }
 ];
 
 export default routes;
