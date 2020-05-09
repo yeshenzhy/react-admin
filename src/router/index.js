@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import Layout from '@src/pages/Layout/index';
 import Login from '@src/pages/Login';
+import AuthRouter from '@src/pages/Auth/AuthRouter';
 
 class Router extends React.Component {
   render() {
@@ -11,7 +12,7 @@ class Router extends React.Component {
       <HashRouter>
         <Switch>
           <Route component={Login} exact path="/login" />
-          <Route path="/" component={Layout} />
+          <AuthRouter path="/" component={Layout} />
         </Switch>
       </HashRouter>
     );

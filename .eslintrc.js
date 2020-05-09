@@ -10,6 +10,7 @@ module.exports = {
     es6: true
   },
   rules: {
+    "no-param-reassign": 0,
     "no-var": 2,
     "no-console": 0,
     "no-unused-vars": 0,

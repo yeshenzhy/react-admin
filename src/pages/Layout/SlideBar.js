@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import routes from '@src/router/routerMap';
-// import connect from '@connect';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
+// import connect from '@connect';
+// 判断路由权限
+const handleFilter = permission => {
+  // 过滤没有权限的页面TODO:
+  const roleType = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo')).role.type || 1;
+  if (!permission || permission === roleType) return true;
+  return false;
+};
+// 递归循环侧边导航
 const createSubMenuComponents = (route, pathname, history) => {
-  const children = route.children.filter(routes => !routes.hidden);
+  const children = route.children.filter(routes => !routes.hidden && routes.layout && handleFilter(routes.permission));
   return (
     <SubMenu
       key={route.path}
@@ -19,20 +27,70 @@ const createSubMenuComponents = (route, pathname, history) => {
       )}
     >
       {
-        children.map(item => (!item.children
-          ? (
-            <Menu.Item key={item.path}>
-              <Link
-                to={item.path}
-
-              >
-                {item.name}
-              </Link>
-            </Menu.Item>
-          ) : createSubMenuComponents(item, pathname, history)))
+        children.map(item => {
+          if (!item.showChild) {
+            if (item.children) {
+              return (
+                <Menu.Item key={item.children[0].children ? item.children[0].children[0].path : item.children[0].path}>
+                  <Link
+                    to={item.children[0].children ? item.children[0].children[0].path : item.children[0].path}
+                  >
+                    {item.children[0].children ? item.children[0].children[0].name : item.children[0].name}
+                  </Link>
+                </Menu.Item>
+              );
+            } 
+            return (
+              <Menu.Item key={item.path}>
+                <Link
+                  to={item.path}
+                >
+                  <div>
+                    <Icon type={item.icon} />
+                    <span>{item.name}</span>
+                  </div>
+                </Link>
+              </Menu.Item>
+            );
+          } 
+          return createSubMenuComponents(item, pathname, history);
+        })
       }
     </SubMenu>
   );
+};
+// 侧边路由子集处理
+const routerChild = (routes) => routes.forEach((item) => {
+  if (item.children) {
+    const childLen = item.children.filter(child => !child.hidden).length;
+    switch (childLen) {
+      // 没有一个子菜单要显示
+      case 0:
+        item.showChild = false;
+        break;
+        // 只有一个子菜单要显示
+      case 1:
+        item.showChild = false;
+        break;
+      default:
+        item.showChild = true;
+        break;
+    }
+    routerChild(item.children);
+  }
+});
+routerChild(routes);
+// console.log(routes);
+const selectedRouter = (pathname, routes, parent) => {
+  for (let i = 0; i < routes.length; i++) {
+    if (routes[i].path === pathname) {
+      if (parent) return parent;
+      return routes[i];
+    } 
+    if (routes[i].children) {
+      return selectedRouter(pathname, routes[i].children, routes[i]);
+    }
+  }
 };
 // @connect
 @withRouter
@@ -46,7 +104,18 @@ class SlideBar extends Component {
     //   openkeys, breadCrumbs, collapsed, routes,
     // } = this.props.appReducer;
     // const { location: { pathname }, history } = this.props;
-    const menuSelected = this.props.history.location.pathname;
+    // 路由初始化处理
+    let menuSelected;
+    const selectItem = selectedRouter(this.props.history.location.pathname, routes);
+    if (selectItem) {
+      if (selectItem.children) {
+        menuSelected = selectItem.children[0].path;
+      } else {
+        menuSelected = selectItem.path;
+      }
+    } else {
+      menuSelected = this.props.history.location.pathname;
+    }
     const menuOpened = menuSelected.split('/');
     menuOpened.splice(0, 1);
     const menuArray = [];
@@ -75,8 +144,22 @@ class SlideBar extends Component {
           defaultOpenKeys={[...menuArray]}
         >
           {
-            routes.filter(route => !route.hidden && route.layout).map((item) => {
-              if (!item.children) {
+            routes.filter(route => !route.hidden && handleFilter(route.permission) && route.layout).map((item) => {
+              if (!item.showChild) {
+                if (item.children) {
+                  return (
+                    <Menu.Item key={item.children[0].path}>
+                      <Link
+                        to={item.children[0].path}
+                      >
+                        <div>
+                          <Icon type={item.children[0].icon} />
+                          <span>{item.children[0].name}</span>
+                        </div>
+                      </Link>
+                    </Menu.Item>
+                  );
+                } 
                 return (
                   <Menu.Item key={item.path}>
                     <Link

@@ -14,7 +14,6 @@ const routes = [
     component: asyncComponens('Home'),
     name: '首页',
     icon: 'database',
-    auth: true,
     layout: true,
   },
   {
@@ -22,38 +21,55 @@ const routes = [
     component: asyncComponens('Login'),
     name: '登录',
     icon: 'database',
-    auth: true,
-    hidden: true,
     layout: false
   },
   {
     path: '/knowLedge',
     name: 'react 知识点',
     icon: 'lock',
-    auth: true,
     layout: true,
-    redirect: '/knowLedge/syntax',
+    redirect: '/knowLedge/life-cycle',
     children: [
       {
         path: '/knowLedge/syntax',
-        component: asyncComponens('KnowLedge/Syntax'),
+        component: asyncComponens('KnowLedge/ChildChild'),
         name: '常用语法',
-        layout: false,
+        permission: 1, // 2表示无权限
+        layout: true,
+        redirect: '/knowLedge/syntax/list',
+        children: [
+          {
+            path: '/knowLedge/syntax/list',
+            component: asyncComponens('KnowLedge/ChildChild'),
+            name: 'ChildChild',
+            layout: true,
+          },
+          {
+            path: '/knowLedge/syntax/detail',
+            component: asyncComponens('KnowLedge/MyCycle'),
+            name: '我的',
+            hidden: true,
+            layout: true,
+          }
+        ]
       },
       {
         path: '/knowLedge/life-cycle',
         name: '生命周期',
         redirect: '/knowLedge/life-cycle/Childpage',
+        layout: true,
         children: [
           {
             path: '/knowLedge/life-cycle/Childpage',
             name: 'Childpage',
             redirect: '/knowLedge/life-cycle/Childpage/childchild',
+            layout: true,
             children: [
               {
                 path: '/knowLedge/life-cycle/Childpage/childchild',
                 component: asyncComponens('KnowLedge/ChildChild'),
-                name: 'ChildChild'
+                name: 'ChildChild',
+                layout: true,
               }
             ]
           }
@@ -61,12 +77,6 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/my',
-    component: asyncComponens('KnowLedge/MyCycle'),
-    name: '我的',
-    layout: false
-  }
 ];
 
 export default routes;
