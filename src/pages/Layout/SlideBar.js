@@ -88,7 +88,7 @@ const selectedRouter = (pathname, routes, parent) => {
       return routes[i];
     } 
     if (routes[i].children) {
-      return selectedRouter(pathname, routes[i].children, routes[i]);
+      return selectedRouter(pathname, routes[i].children, routes[i].showChild ? '' : routes[i]);
     }
   }
 };
