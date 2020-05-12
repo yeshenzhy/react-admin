@@ -10,6 +10,7 @@ module.exports = {
     es6: true
   },
   rules: {
+    "linebreak-style": ["error", "windows"],
     "no-param-reassign": 0,
     "no-var": 2,
     "no-console": 0,
