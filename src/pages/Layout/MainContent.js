@@ -11,7 +11,7 @@ const { Content } = Layout;
 // 路由渲染
 const handleFilter = permission => {
   // 过滤没有权限的页面TODO:
-  const roleType = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo')).role.type || 1;
+  const roleType = localStorage.getItem('userInfo') && (JSON.parse(localStorage.getItem('userInfo')).role.type || 1);
   if (!permission || permission === roleType) return true;
   return false;
 };
@@ -25,7 +25,7 @@ const RouteComponent = route => {
   }
 };
 // 路由表渲染
-const renderRouteComponent = routes => routes.map(route => (route.children ? route.children.map(item => RouteComponent(item)) : RouteComponent(route)));
+const renderRouteComponent = routes => routes.map(route => (RouteComponent(route)));
 
 const MainContent = ({ location }) => (
   <TransitionGroup>
