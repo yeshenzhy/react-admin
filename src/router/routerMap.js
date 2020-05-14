@@ -4,7 +4,7 @@ import Loadable from 'react-loadable';
 const asyncComponens = (url) => Loadable({
     loader: () => import(`../pages/${url}`),
     loading() {
-      return <div>正在加载</div>;
+      return <div>正在加载...</div>;
     },
   });
 
