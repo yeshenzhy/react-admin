@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 const config = {
@@ -77,12 +77,12 @@ const config = {
     ],
   },
   plugins: [
-    new webpack.BannerPlugin('夜神丶'), // 为每个 chunk 文件头部添加 banner。
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
       inject: true,
     }),
+    new webpack.BannerPlugin('夜神丶'), // 为每个 chunk 文件头部添加 banner。
   ],
   resolve: {
     extensions: [' ', '.js', '.jsx', '.json'],

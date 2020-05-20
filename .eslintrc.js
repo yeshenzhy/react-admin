@@ -10,6 +10,9 @@ module.exports = {
     es6: true
   },
   rules: {
+    "global-require": 0,
+    "lines-between-class-members": ["error", "never"],
+    "no-alert": 0,
     "linebreak-style": ["error", "windows"],
     "no-param-reassign": 0,
     "no-var": 2,

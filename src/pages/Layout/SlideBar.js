@@ -98,7 +98,6 @@ class SlideBar extends Component {
   onOpenChange = (openKeys) => {
     this.props.setOpenKeys([openKeys.pop()]);
   }
-
   render() {
     // const {
     //   openkeys, breadCrumbs, collapsed, routes,
