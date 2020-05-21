@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Know from './know';
-import { addCount } from '../../redux/actions/countAction';
 
 class Syntax extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state = {
       info: {
         name: '',
@@ -13,12 +13,10 @@ class Syntax extends Component {
       },
     };
   }
-
   handleNumber() {
     console.log(this.state.info, 'zzz');
-    this.props.addCount({ age: 18 + Math.ceil(Math.random() * 10) });
+    this.props.addCount({ age: ++this.props.userInfo.age });
   }
-
   render() {
     const list = ['a', 'b', 'c'];
     const dom = list.map((item, index) => (<li data={list} key={index}>{item}</li>)) || '';
@@ -29,7 +27,7 @@ class Syntax extends Component {
           <div onClick={this.handleNumber.bind(this)}>
             我是button
             {' '}
-            {this.props._userInfo.age}
+            {this.props.userInfo.age}
           </div>
         </Know>
         <ul>{dom}</ul>
@@ -38,13 +36,4 @@ class Syntax extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  _userInfo: state.userInfo,
-});
-const mapDispatchToProps = dispatch => ({
-  addCount: data => {
-    dispatch(addCount(data));
-  },
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Syntax);
 

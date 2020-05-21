@@ -28,54 +28,16 @@ const routes = [
     name: 'react 知识点',
     icon: 'lock',
     layout: true,
-    redirect: '/knowLedge/life-cycle',
+    redirect: '/knowLedge/syntax',
     children: [
       {
         path: '/knowLedge/syntax',
-        component: asyncComponens('KnowLedge/ChildChild'),
+        component: asyncComponens('KnowLedge/Syntax'),
         name: '常用语法',
         permission: 1, // 2表示无权限
         layout: true,
-        redirect: '/knowLedge/syntax/list',
-        children: [
-          {
-            path: '/knowLedge/syntax/list',
-            component: asyncComponens('KnowLedge/ChildChild'),
-            name: 'ChildChild',
-            layout: true,
-          },
-          {
-            path: '/knowLedge/syntax/detail',
-            component: asyncComponens('KnowLedge/MyCycle'),
-            name: '我的',
-            hidden: true,
-            layout: true,
-          }
-        ]
       },
-      {
-        path: '/knowLedge/life-cycle',
-        name: '生命周期',
-        redirect: '/knowLedge/life-cycle/Childpage',
-        layout: true,
-        children: [
-          {
-            path: '/knowLedge/life-cycle/Childpage',
-            name: 'Childpage',
-            redirect: '/knowLedge/life-cycle/Childpage/childchild',
-            layout: true,
-            children: [
-              {
-                path: '/knowLedge/life-cycle/Childpage/childchild',
-                component: asyncComponens('KnowLedge/ChildChild'),
-                name: 'ChildChild',
-                layout: true,
-              }
-            ]
-          }
-        ]
-      },
-    ],
+    ]
   },
 ];
 

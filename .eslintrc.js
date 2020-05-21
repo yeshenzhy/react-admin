@@ -24,6 +24,16 @@ module.exports = {
     "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "import/prefer-default-export": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "class-methods-use-this": 0,
     "no-multiple-empty-lines": [1, { max: 1 }],
     "prefer-rest-params": 0,

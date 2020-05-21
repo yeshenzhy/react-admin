@@ -2,7 +2,7 @@ import React from 'react';
 import {
   HashRouter, Route, Switch, 
 } from 'react-router-dom';
-import Layout from '@src/pages/Layout/index';
+import Layout from '@src/pages/layout/Index';
 import Login from '@src/pages/Login';
 import AuthRouter from '@src/pages/Auth/AuthRouter';
 

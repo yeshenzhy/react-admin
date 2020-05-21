@@ -1,3 +1,4 @@
 import { combineReducers } from 'redux';
-import userInfo from './userinfo';
-export default combineReducers({ userInfo });
+import collapse from './setting';
+
+export default combineReducers({ collapse });
