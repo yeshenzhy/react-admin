@@ -1,9 +1,13 @@
 import React from 'react';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { setCollapse } from '../../redux/actions/setting';
 
 class TopHeader extends React.Component {
+  constructor() {
+    super();
+    this.toggle = this.toggle.bind(this);
+  }
   toggle() {
     this.props.setCollapse({ isCollapsed: !this.props.collapse.isCollapsed });
   }
@@ -11,9 +15,7 @@ class TopHeader extends React.Component {
     return (
       <div className="top-header">
         <div className="top-header-inner">
-          <div className="toggle-icon" onClick={this.toggle.bind(this)}>
-            {this.props.collapse.isCollapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-          </div>
+          <Icon className="trigger" type={this.props.collapse.isCollapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle} />
           <div className="header-title">React-antd-admin 通用后台管理系统</div>
         </div>
       </div>

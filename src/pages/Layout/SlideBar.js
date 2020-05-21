@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import routes from '@src/router/routerMap';
+import { connect } from 'react-redux';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -42,13 +43,9 @@ const createSubMenuComponents = (route, pathname, history) => {
             } 
             return (
               <Menu.Item key={item.path}>
-                <Link
-                  to={item.path}
-                >
-                  <div>
-                    <Icon type={item.icon} />
-                    <span>{item.name}</span>
-                  </div>
+                <Link to={item.path}>
+                  <Icon type={item.icon} />
+                  <span>{item.name}</span>
                 </Link>
               </Menu.Item>
             );
@@ -104,6 +101,7 @@ class SlideBar extends Component {
     // } = this.props.appReducer;
     // const { location: { pathname }, history } = this.props;
     // 路由初始化处理
+    const { collapse } = this.props;
     let menuSelected;
     const selectItem = selectedRouter(this.props.history.location.pathname, routes);
     if (selectItem) {
@@ -129,7 +127,8 @@ class SlideBar extends Component {
       <Sider
         className="app-sider"
         trigger
-        collapsed={false}
+        collapsible
+        collapsed={collapse.isCollapsed}
       >
         <div className="logo" style={{ color: 'white' }}>
           Logo
@@ -141,6 +140,7 @@ class SlideBar extends Component {
           defaultSelectedKeys={[menuSelected]}
           selectedKeys={[menuSelected]}
           defaultOpenKeys={[...menuArray]}
+          inlineCollapsed={collapse.isCollapsed}
         >
           {
             routes.filter(route => !route.hidden && handleFilter(route.permission) && route.layout).map((item) => {
@@ -148,26 +148,18 @@ class SlideBar extends Component {
                 if (item.children) {
                   return (
                     <Menu.Item key={item.children[0].path}>
-                      <Link
-                        to={item.children[0].path}
-                      >
-                        <div>
-                          <Icon type={item.children[0].icon} />
-                          <span>{item.children[0].name}</span>
-                        </div>
+                      <Link to={item.children[0].path}>
+                        <Icon type={item.children[0].icon} />
+                        <span>{item.children[0].name}</span>
                       </Link>
                     </Menu.Item>
                   );
                 } 
                 return (
                   <Menu.Item key={item.path}>
-                    <Link
-                      to={item.path}
-                    >
-                      <div>
-                        <Icon type={item.icon} />
-                        <span>{item.name}</span>
-                      </div>
+                    <Link to={item.path}>
+                      <Icon type={item.icon} />
+                      <span>{item.name}</span>
                     </Link>
                   </Menu.Item>
                 );
@@ -180,6 +172,12 @@ class SlideBar extends Component {
     );
   }
 }
-
-export default SlideBar;
+const mapStateToProps = state => state;
+// const mapDispatchToProps = dispatch => ({
+//   setCollapse: data => {
+//     dispatch(setCollapse(data));
+//   },
+// });
+export default connect(mapStateToProps)(SlideBar);
+// export default SlideBar;
 

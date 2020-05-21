@@ -10,6 +10,7 @@ module.exports = {
     es6: true
   },
   rules: {
+    "func-names": ["error", "never"],
     "global-require": 0,
     "lines-between-class-members": ["error", "never"],
     "no-alert": 0,
