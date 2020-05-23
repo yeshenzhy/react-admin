@@ -10,6 +10,9 @@ module.exports = {
     es6: true
   },
   rules: {
+    "arrow-body-style": ["error", "always"],
+    "no-underscore-dangle": 0,
+    "no-useless-constructor": 0,
     "func-names": ["error", "never"],
     "global-require": 0,
     "lines-between-class-members": ["error", "never"],
@@ -65,5 +68,8 @@ module.exports = {
     "jsx-a11y/label-has-for": 0,
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/no-static-element-interactions": 0,
+  },
+  parserOptions: {
+    parser: "babel-eslint"
   }
 };

@@ -9,6 +9,9 @@ class Login extends React.Component {
     };
     this.login = this.login.bind(this);
   }
+  componentDidMount() {
+    console.log('组件挂载完毕');
+  }
   login() {
     localStorage.setItem('isLogin', '1');
     const id = 12; 

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Redirect, withRouter, Route, Switch, 
 } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import allRoutes from '@src/router/routerMap';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
@@ -17,20 +16,21 @@ const handleFilter = permission => {
 };
 const RouteComponent = route => {
   if (route.children) {
-    return (route.children.map(item => (RouteComponent(item))));
+    return (route.children.map(item => { return (RouteComponent(item)); }));
   }
   if (handleFilter(route.permission)) {
-    return (<Route render={() => <route.component />} key={route.path} path={route.path} />
+    return (<Route exact render={() => { return <route.component />; }} key={route.path} path={route.path} />
     ); 
   }
 };
 // 路由表渲染
-const renderRouteComponent = routes => routes.map(route => (RouteComponent(route)));
+const renderRouteComponent = routes => { return routes.map(route => { return (RouteComponent(route)); }); };
 
-const MainContent = ({ location }) => (
-  <div className="main-content">
-    <TransitionGroup>
-      <CSSTransition classNames="fade" key={location.pathname} timeout={500}>
+@withRouter
+class MainContent extends React.Component {
+  render() {
+    return (
+      <div className="main-content">
         <Content style={{ padding: '15px' }}>
           <Switch>
             {renderRouteComponent(allRoutes)}
@@ -38,10 +38,11 @@ const MainContent = ({ location }) => (
             <Redirect to="/home" />
           </Switch>
         </Content>
-      </CSSTransition>
-    </TransitionGroup>
-  </div>
-);
+      </div>
+    );
+  } 
+}
 
-const mapStateToProps = state => ({ userInfo: state.userInfo });
+const mapStateToProps = state => { return { userInfo: state.userInfo }; };
 export default withRouter(connect(mapStateToProps)(MainContent));
+

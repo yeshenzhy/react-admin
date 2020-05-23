@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
 // 判断路由权限
 const handleFilter = permission => {
   // 过滤没有权限的页面TODO:
-  const roleType = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo')).role.type || 1;
+  const roleType = localStorage.getItem('userInfo') || 1;
   if (!permission || permission === roleType) return true;
   return false;
 };
@@ -126,8 +126,7 @@ class SlideBar extends Component {
     return (
       <Sider
         className="app-sider"
-        trigger
-        collapsible
+        // collapsible
         collapsed={collapse.isCollapsed}
       >
         <div className="logo" style={{ color: 'white' }}>
@@ -140,7 +139,6 @@ class SlideBar extends Component {
           defaultSelectedKeys={[menuSelected]}
           selectedKeys={[menuSelected]}
           defaultOpenKeys={[...menuArray]}
-          inlineCollapsed={collapse.isCollapsed}
         >
           {
             routes.filter(route => !route.hidden && handleFilter(route.permission) && route.layout).map((item) => {

@@ -6,11 +6,11 @@ module.exports = merge(common, {
   mode: 'development',
   devServer: {
     hot: true,
-    port: '8080',
+    port: '3030',
     inline: true,
     open: true,
     overlay: true,
-    // proxy: { //代理
+    // proxy: { //代理配置
     //   '/api': {
     //     target: '', 
     //     changeOrigin: true,  
