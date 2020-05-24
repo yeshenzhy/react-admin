@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: '/login',
-    component: asyncComponens('Login'),
+    component: asyncComponens('Login/Login'),
     name: '登录',
     icon: 'database',
     layout: false

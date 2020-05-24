@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, message } from 'antd';
+import { Button } from 'antd';
 
 import { withRouter } from 'react-router-dom';
 import { urlParams } from '@src/utils/tools';
