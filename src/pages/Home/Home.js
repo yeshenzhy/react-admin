@@ -9,12 +9,7 @@ import { loginApi } from '@src/api/homeApi';
 class Home extends React.Component {
   componentDidMount() {
     console.log('zxxccczz');
-    loginApi({
-      name: 'zhy',
-      mobile: '18676778987',
-      password: '123456',
-      passwordAgain: '123456',
-    })
+    loginApi()
       .then(res => {})
       .catch(err => {
         console.log(err);

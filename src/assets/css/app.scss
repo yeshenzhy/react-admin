@@ -24,8 +24,11 @@ $borderColor: #d8d8d8;
 .ant-menu-inline {
 	border: none;
 }
-html,body {
+html,body{
 	height: 100%;
+}
+html,body,li,a,p,span,div,i,em,img,button,input {
+	cursor: url('../static/point.png'),auto !important;
 }
 #root{
 	height: 100%;

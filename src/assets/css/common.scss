@@ -14,12 +14,12 @@
 
   &::-webkit-scrollbar-track {
     border-radius: 3px;
-    background-color: #0c4a85;
+    background: linear-gradient(to bottom, red , blue);
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 3px;
-    background-color: #001529;
+    background: linear-gradient(to bottom,rgb(255,50,98),rgb(50,255,228));
   }
 }
 

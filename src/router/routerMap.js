@@ -11,7 +11,7 @@ const asyncComponens = (url) => Loadable({
 const routes = [
   {
     path: '/home',
-    component: asyncComponens('Home'),
+    component: asyncComponens('Home/Home'),
     name: '首页',
     icon: 'database',
     layout: true,

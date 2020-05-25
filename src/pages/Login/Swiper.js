@@ -1,5 +1,4 @@
 import React from 'react';
-import './normalize.css';
 import './demo.css';
 import './style.css';
 
@@ -36,7 +35,11 @@ class Swiper extends React.Component {
   componentDidMount() {
     this.state.timer = setInterval(() => {
       this.changeSwiper();
-    }, 10000);
+    }, 3000);
+  }
+  componentWillUnmount() {
+    console.log('卸载');
+    clearInterval(this.state.timer);
   }
   changeSwiper() {
     const checkedIndex = this.state.swiperList.findIndex(item => { return item.checked; }) + 1;
@@ -63,12 +66,12 @@ class Swiper extends React.Component {
         })}
         <div className="slider">
           <div className="captions">
-            <div className="c1">duzy fiat</div>
-            <div className="c2">syrenka</div>
-            <div className="c3">wartburg</div>
-            <div className="c4">warszawa</div>
-            <div className="c5">wolga</div>
-            <div className="c6">polonez</div>
+            <div className="c1">ルキア</div>
+            <div className="c2">うずまき ナルト</div>
+            <div className="c3">じょてい</div>
+            <div className="c4">いのうえおりひめ</div>
+            <div className="c5">キリト</div>
+            <div className="c6">てんさざんげつ</div>
           </div>
           <div className="img img1">
             <div className="frag frag1"></div>
