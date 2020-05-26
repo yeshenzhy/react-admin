@@ -12,9 +12,9 @@ class Login extends React.Component {
     // };
   }
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.login();
-    // }, 2000);
+    setTimeout(() => {
+      this.login();
+    }, 2000);
   }
   login() {
     localStorage.setItem('isLogin', '1');
