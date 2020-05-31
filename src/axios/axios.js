@@ -16,7 +16,7 @@ const config = {
   baseURL: apiRoot.BASE_API,
   timeout: 60000, // Timeout 为了防止导出过大文件失败，所以把时间设为1分钟
   headers: {},
-  withCredentials: true, // 是否可以携带cookie
+  withCredentials: false, // 是否可以携带cookie
 };
 const $axios = axios.create(config);
 // 请求拦截
@@ -44,7 +44,7 @@ $axios.interceptors.response.use(
     if (response.data.success === false) {
       // message.error(response.data.message);
     }
-    return response;
+    return Promise.resolve(response.data);
   },
   (error) => {
     // 接口出错判断

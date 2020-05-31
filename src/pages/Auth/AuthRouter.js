@@ -13,7 +13,7 @@ class AuthRouter extends React.Component {
     super(props);
   }
   render() {
-    const isLogged = localStorage.getItem('isLogin') === '1';
+    const isLogged = localStorage.getItem('userInfo');
     const { rest, component: Component } = this.props;
     return <Route exact {...rest} render={props => { return (isLogged ? <Component {...props} /> : <Redirect to="/login" />); }} />;
   }

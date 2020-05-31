@@ -33,12 +33,12 @@ class Swiper extends React.Component {
     ],
   }
   componentDidMount() {
+    this.state.timer && clearInterval(this.state.timer);
     this.state.timer = setInterval(() => {
       this.changeSwiper();
-    }, 3000);
+    }, 10000);
   }
   componentWillUnmount() {
-    console.log('卸载');
     clearInterval(this.state.timer);
   }
   changeSwiper() {

@@ -12,6 +12,12 @@ class TopHeader extends React.Component {
     super();
     this.toggle = this.toggle.bind(this);
   }
+  componentWillMount() {
+    const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
+    this.setState({
+      userInfo,
+    });
+  }
   // 导航侧边栏折叠
   toggle() {
     this.props.setCollapse({ isCollapsed: !this.props.collapse.isCollapsed });
@@ -20,17 +26,19 @@ class TopHeader extends React.Component {
   setting() {}
   // 退出登录
   handleLogout() {
-    localStorage.removeItem('isLogin');
     localStorage.removeItem('userInfo');
     this.props.history.push('/');
   }
   render() {
-    console.log(this.props, 'zzzcc');
     const DropdownList = (
       <Menu className="drop-list">
         <Menu.Item key="user">
           <Icon type="user" />
-          1833333333
+          {this.state.userInfo.name}
+        </Menu.Item>
+        <Menu.Item key="mobile">
+          <Icon type="phone" />
+          {this.state.userInfo.mobile}
         </Menu.Item>
         <Menu.Item key="logout" onClick={this.handleLogout.bind(this)}>
           <Icon type="logout" />

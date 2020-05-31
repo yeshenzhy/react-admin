@@ -228,3 +228,27 @@ html,body,li,a,p,span,div,i,em,img,button,input {
 		}
 	}
 }
+/******** 滚动条样式 ********/
+* {
+  outline: none;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+		height: 6px;
+		background: none;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: linear-gradient(to bottom, red , blue);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: linear-gradient(to bottom,rgb(255,50,98),rgb(50,255,228));
+  }
+}
