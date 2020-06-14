@@ -56,7 +56,7 @@ const config = {
           limit: 10240,
           name: '[name].[hash:4].[ext]',
           outputPath: './images', // 打包后图片文件输出路径
-          publicPath: './images',
+          publicPath: '../images',
         },
       },
       {
