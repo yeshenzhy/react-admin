@@ -13,11 +13,11 @@ body {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	/* margin: auto; */
+	margin: auto;
 	width: 900px;
 	height: 500px;
 	font: 1em 'Rationale',sans-serif;
-	transform: scale(1.55);
+	transform: scale(1.65);
 }
 .slider, .img {
 	width: inherit;
