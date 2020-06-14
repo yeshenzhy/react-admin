@@ -1,5 +1,5 @@
 module.exports = {
   NODE_ENV: '"production"',
   ENV_CONFIG: '"prod"',
-  BASE_API: '"https://mipi.newxcx.91keman.com"',
+  BASE_API: 'http://yeshen1.cn:8888/api/v1',
 };
