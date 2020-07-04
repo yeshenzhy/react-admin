@@ -26,8 +26,8 @@ $axios.interceptors.request.use(
     // 通过reudx的store拿到拿到全局状态树的token ，添加到请求报文，后台会根据该报文返回status
     // 此处应根据具体业务写token
     NProgress.start();
-    const token = localStorage.getItem('token') || 'FA2019';
-    config.headers['Auth-Token'] = token;
+    const token = localStorage.getItem('token') || '';
+    config.headers.Authorization = `${'Bearer '}${JSON.parse(token)}`;
     return config;
   },
   (error) => {
