@@ -6,6 +6,7 @@ import { loginApi, registerApi } from '@src/api/homeApi';
 import Canvas from './Canvas';
 import Swiper from './Swiper';
 import './Login.scss';
+import img_beian from '@src/assets/static/flag.png';
 
 const Register = (props) => {
   return (
@@ -107,6 +108,12 @@ class LoginComponent extends React.Component {
     };
   }
   componentDidMount() {
+    const box = document.getElementById('form');
+    const bo = box.getBoundingClientRect().top;
+    console.log(bo, 'zz');
+    this.setState({
+      bottom: `-${bo - 6}px`,
+    });
     this.init();
   }
   // 初始化
@@ -173,7 +180,7 @@ class LoginComponent extends React.Component {
         <div className="switch-style">
           <Switch checkedChildren="卡通" unCheckedChildren="星空" defaultChecked onChange={this.switchStyle.bind(this)} />
         </div>
-        <div className="form">
+        <div className="form" id="form">
           <div className="title">
             <div className="name">夜神丶管理系统</div>
             <div className="register" onClick={this.switchRegister.bind(this)}>
@@ -191,6 +198,10 @@ class LoginComponent extends React.Component {
             getFieldDecorator={getFieldDecorator} 
             register={this.register.bind(this)}
           />
+          <div className="beian" style={{ bottom: this.state.bottom }}> 
+            <img src={img_beian} />
+            <a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备19025536号 © 2019</a>
+          </div>
         </div>
       </div>
     );

@@ -3,6 +3,27 @@
   height: 100%;
   overflow: hidden;
   position: relative;
+  .beian{
+    position: fixed;
+    display: flex;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 0;
+    font-size: 14px;
+    width: 250px;
+    justify-content: center;
+
+    align-items: center;
+    img{
+      width: 30px;
+      height: 12.5px;
+      flex-shrink: 0;
+      margin-right: 5px;
+    }
+    a{
+      font-size: 14px;
+    }
+  }
   .switch-style{
     position: absolute;
     left: 0%;
