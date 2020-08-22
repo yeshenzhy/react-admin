@@ -27,7 +27,9 @@ $axios.interceptors.request.use(
     // 此处应根据具体业务写token
     NProgress.start();
     const token = localStorage.getItem('token') || '';
-    config.headers.Authorization = `${'Bearer '}${JSON.parse(token)}`;
+    if (token) {
+      config.headers.Authorization = `${'Bearer '}${JSON.parse(token)}`;
+    }
     return config;
   },
   (error) => {
@@ -50,6 +52,12 @@ $axios.interceptors.response.use(
     // 接口出错判断
     NProgress.done(); // 设置加载进度条(结束..)
     message.error(error.response.data.msg, 2);
+    if (error.response.data.code === 3000) {
+      setTimeout(() => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/#/login';
+      }, 1500);
+    }
     return Promise.reject(error.response.data);
   },
 );

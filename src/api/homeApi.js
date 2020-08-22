@@ -12,4 +12,10 @@ const registerApi = (data) => {
     data,
   }); 
 };
-export { loginApi, registerApi };
+const testApi = (data) => {
+  return $axios('test', {
+    method: 'POST',
+    data,
+  }); 
+};
+export { loginApi, registerApi, testApi };

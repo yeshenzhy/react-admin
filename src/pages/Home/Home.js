@@ -5,6 +5,7 @@ import {
 
 import { withRouter } from 'react-router-dom';
 import { urlParams } from '@src/utils/tools';
+import { testApi } from '@src/api/homeApi';
 
 const { Dragger } = Upload;
 const props = {
@@ -53,12 +54,16 @@ class Home extends React.Component {
   goNext() {
     this.props.history.push({ pathname: '/knowLedge/syntax' });
   }
+  // 测试
+  test() {
+    testApi({}).then(res => { return console.log(res); });
+  }
   render() {
     const obj = urlParams(this.props.location.search);
     console.log(obj);
     return (
       <div>
-        <Button type="primary">Primary</Button>
+        <Button type="primary" onClick={this.test}>Primary</Button>
         <UploadImg></UploadImg>
       </div>
     );

@@ -43,7 +43,6 @@ class Swiper extends React.Component {
   }
   changeSwiper() {
     const checkedIndex = this.state.swiperList.findIndex(item => { return item.checked; }) + 1;
-    console.log(checkedIndex);
     const { swiperList } = this.state;
     swiperList.forEach(item => {
       item.checked = false;
