@@ -5,16 +5,14 @@ import Know from './know';
 class Syntax extends Component {
   constructor(props) {
     super(props);
-
     console.log(this.props);
   }
   render() {
-    const list = ['a', 'b', 'c', 'zhy'];
+    const list = ['a', 'b', 'c', 'zhy', 'xhz'];
 
     const dom = list.map((item, index) => { return (<li data={list} key={index}>{item}</li>); }) || '';
 
     console.log(this.props);
-
     return (
 
       <div>
