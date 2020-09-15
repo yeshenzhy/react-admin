@@ -8,7 +8,7 @@ class Syntax extends Component {
     console.log(this.props);
   }
   render() {
-    const list = ['a', 'b', 'c', 'zhy', 'xhz'];
+    const list = ['a', 'b', 'c', 'zhy', 'xhz', 'lyx'];
 
     const dom = list.map((item, index) => { return (<li data={list} key={index}>{item}</li>); }) || '';
 
