@@ -17,7 +17,7 @@ module.exports = {
     "global-require": 0,
     "lines-between-class-members": ["error", "never"],
     "no-alert": 0,
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": ["error", "unix"],
     "no-param-reassign": 0,
     "no-var": 2,
     "no-console": 0,
