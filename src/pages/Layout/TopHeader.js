@@ -69,7 +69,7 @@ class TopHeader extends React.Component {
             <div className="dropdown-wrap" id="dropdown-wrap" style={{ cursor: 'pointer' }}>
               <Dropdown getPopupContainer={() => { return document.getElementById('dropdown-wrap'); }} overlay={DropdownList}>
                 <div>
-                  <Avatar size="large" icon="user" />
+                  <Avatar size="large" icon="user" src="https://yeshen-img-1302910797.cos.ap-nanjing.myqcloud.com/bag_festival_1604725753360.png" />
                   <Icon style={{ color: 'rgba(0,0,0,.3)', cursor: 'pointer' }} type="caret-down" />
                 </div>
               </Dropdown>

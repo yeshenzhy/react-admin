@@ -176,9 +176,9 @@ class LoginComponent extends React.Component {
     const { isRegister } = this.state;
     return (
       <div className="pages-login">
-        {this.state.isStar ? <Canvas /> : <Swiper />}
+        {!this.state.isStar ? <Canvas /> : <Swiper />}
         <div className="switch-style">
-          <Switch checkedChildren="卡通" unCheckedChildren="星空" defaultChecked onChange={this.switchStyle.bind(this)} />
+          <Switch checkedChildren="星空" unCheckedChildren="卡通" defaultChecked onChange={this.switchStyle.bind(this)} />
         </div>
         <div className="form" id="form">
           <div className="title">

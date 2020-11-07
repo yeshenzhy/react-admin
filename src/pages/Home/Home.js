@@ -10,23 +10,25 @@ import { testApi } from '@src/api/homeApi';
 const { Dragger } = Upload;
 const props = {
   name: 'file',
-  multiple: true,
+  multiple: false,
   headers: {
     Authorization: localStorage.getItem('token') ? `${'Bearer '}${JSON.parse(localStorage.getItem('token'))}` : '',
   },
-  action: 'http://localhost:8888/api/v1/upload',
+  action: 'http://localhost:5678/api/v1/upload',
+  showUploadList: false,
   beforeUpload() {
     props.headers.Authorization = localStorage.getItem('token') ? `${'Bearer '}${JSON.parse(localStorage.getItem('token'))}` : '';
   },
   onChange(info) {
-    const { status } = info.file;
+    const { status, response } = info.file;
     if (status !== 'uploading') {
       console.log(info.file, info.fileList);
     }
     if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
+      console.log(response.data.url, 'zzz');
+      message.success('图片上传成功');
     } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
+      message.error('图片上传失败');
     }
   },
 };
