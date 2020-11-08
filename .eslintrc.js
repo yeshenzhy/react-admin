@@ -10,6 +10,8 @@ module.exports = {
     es6: true
   },
   rules: {
+
+    "camelcase": [1, {"properties": "never"}],
     "arrow-body-style": ["error", "always"],
     "no-underscore-dangle": 0,
     "no-useless-constructor": 0,

@@ -3,10 +3,10 @@ import {
   Button, Form, Input, Icon, message, Switch,
 } from 'antd';
 import { loginApi, registerApi } from '@src/api/homeApi';
+import imgBeian from '@src/assets/static/flag.png';
 import Canvas from './Canvas';
 import Swiper from './Swiper';
 import './Login.scss';
-import img_beian from '@src/assets/static/flag.png';
 
 const Register = (props) => {
   return (
@@ -199,8 +199,8 @@ class LoginComponent extends React.Component {
             register={this.register.bind(this)}
           />
           <div className="beian" style={{ bottom: this.state.bottom }}> 
-            <img src={img_beian} />
-            <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备19025536号 © 2019</a>
+            <img alt="加载失败" src={imgBeian} />
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">陕ICP备19025536号 © 2019</a>
           </div>
         </div>
       </div>
