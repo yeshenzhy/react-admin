@@ -15,21 +15,19 @@ class TopHeader extends React.Component {
   }
   // 组件销毁前移除事件监听
   componentWillUnmount() {
-    emitter.removeListener(this.eventEmitter);
+    emitter.removeListener('updateUserInfo', this.updateUser);
   }
   componentWillMount() {
     const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
     // 声明一个自定义事件
     // 在组件装载完成以后
-    this.eventEmitter = emitter.addListener('updateUserInfo', (userInfo) => {
-      console.log(this, 'chufal');
-      this.setState({
-        avatar: userInfo.avatar,
-      });
-      // this.setState({
-      //   userInfo,
-      // });
+    this.eventEmitter = emitter.addListener('updateUserInfo', this.updateUser.bind(this));
+    this.setState({
+      userInfo,
     });
+  }
+  // 更新用户信息
+  updateUser(userInfo) {
     this.setState({
       userInfo,
     });
@@ -85,7 +83,6 @@ class TopHeader extends React.Component {
             <div className="dropdown-wrap" id="dropdown-wrap" style={{ cursor: 'pointer' }}>
               <Dropdown getPopupContainer={() => { return document.getElementById('dropdown-wrap'); }} overlay={DropdownList}>
                 <div>
-                  {this.state.avatar ? <img alt="加载失败" src={this.state.avatar} /> : ''}
                   <Avatar size="large" icon="user" src={this.state.userInfo.avatar} />
                   <Icon style={{ color: 'rgba(0,0,0,.3)', cursor: 'pointer' }} type="caret-down" />
                 </div>
