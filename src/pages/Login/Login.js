@@ -200,7 +200,7 @@ class LoginComponent extends React.Component {
           />
           <div className="beian" style={{ bottom: this.state.bottom }}> 
             <img src={img_beian} />
-            <a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备19025536号 © 2019</a>
+            <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备19025536号 © 2019</a>
           </div>
         </div>
       </div>
