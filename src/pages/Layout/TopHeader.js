@@ -4,6 +4,7 @@ import {
 } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import emitter from '@src/utils/bus';
 import { setCollapse } from '../../redux/actions/setting';
 
 @withRouter
@@ -12,8 +13,23 @@ class TopHeader extends React.Component {
     super();
     this.toggle = this.toggle.bind(this);
   }
+  // 组件销毁前移除事件监听
+  componentWillUnmount() {
+    emitter.removeListener(this.eventEmitter);
+  }
   componentWillMount() {
     const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
+    // 声明一个自定义事件
+    // 在组件装载完成以后
+    this.eventEmitter = emitter.addListener('updateUserInfo', (userInfo) => {
+      console.log(this, 'chufal');
+      this.setState({
+        avatar: userInfo.avatar,
+      });
+      // this.setState({
+      //   userInfo,
+      // });
+    });
     this.setState({
       userInfo,
     });
@@ -69,7 +85,8 @@ class TopHeader extends React.Component {
             <div className="dropdown-wrap" id="dropdown-wrap" style={{ cursor: 'pointer' }}>
               <Dropdown getPopupContainer={() => { return document.getElementById('dropdown-wrap'); }} overlay={DropdownList}>
                 <div>
-                  <Avatar size="large" icon="user" src="https://yeshen-img-1302910797.cos.ap-nanjing.myqcloud.com/bag_festival_1604725753360.png" />
+                  {this.state.avatar ? <img alt="加载失败" src={this.state.avatar} /> : ''}
+                  <Avatar size="large" icon="user" src={this.state.userInfo.avatar} />
                   <Icon style={{ color: 'rgba(0,0,0,.3)', cursor: 'pointer' }} type="caret-down" />
                 </div>
               </Dropdown>

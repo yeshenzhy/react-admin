@@ -6,6 +6,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { urlParams } from '@src/utils/tools';
 import { testApi } from '@src/api/homeApi';
+import emitter from '@src/utils/bus';
 
 const { Dragger } = Upload;
 const props = {
@@ -14,7 +15,7 @@ const props = {
   headers: {
     Authorization: localStorage.getItem('token') ? `${'Bearer '}${JSON.parse(localStorage.getItem('token'))}` : '',
   },
-  action: 'http://localhost:5678/api/v1/upload',
+  action: 'http://service.yeshen1.cn/api/v1/upload',
   showUploadList: false,
   beforeUpload() {
     props.headers.Authorization = localStorage.getItem('token') ? `${'Bearer '}${JSON.parse(localStorage.getItem('token'))}` : '';
@@ -25,7 +26,10 @@ const props = {
       console.log(info.file, info.fileList);
     }
     if (status === 'done') {
-      console.log(response.data.url, 'zzz');
+      console.log(String(response.data.url), 'zzz');
+      const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
+      userInfo.avatar = response.data.url; 
+      emitter.emit('updateUserInfo', userInfo);
       message.success('图片上传成功');
     } else if (status === 'error') {
       message.error('图片上传失败');

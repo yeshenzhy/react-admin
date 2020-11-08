@@ -4,8 +4,10 @@ import {
 } from 'antd';
 import { loginApi, registerApi } from '@src/api/homeApi';
 import imgBeian from '@src/assets/static/flag.png';
+
 import Canvas from './Canvas';
 import Swiper from './Swiper';
+
 import './Login.scss';
 
 const Register = (props) => {
