@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js --progress --inline --colors --watch",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.build.js --progress --inline --colors",
-    "test": "eslint src/index.js",
+    "lint": "eslint src/index.js",
     "eslint": "eslint --fix ./src/index.js",
     "eject": "react-scripts eject"
   },
@@ -82,5 +82,14 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.2"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint src/index.js",
+      "git add"
+    ]
   }
 }
