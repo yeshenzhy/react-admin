@@ -92,7 +92,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "eslint src --max-warnings=0"
+      "eslint src/index.js"
     ]
   }
 }
