@@ -92,8 +92,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "eslint src/index.js",
-      "git add"
+      "eslint src/index.js --max-warnings=0"
     ]
   }
 }
