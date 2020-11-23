@@ -12,4 +12,5 @@ const testApi = (data) => $axios('test', {
   method: 'POST',
   data,
 });
+
 export { loginApi, registerApi, testApi };
