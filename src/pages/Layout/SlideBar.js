@@ -16,7 +16,7 @@ const handleFilter = permission => {
 };
 // 递归循环侧边导航
 const createSubMenuComponents = (route, pathname, history) => {
-  const children = route.children.filter(routes => { return !routes.hidden && routes.layout && handleFilter(routes.permission); });
+  const children = route.children.filter(routes => !routes.hidden && routes.layout && handleFilter(routes.permission));
   return (
     <SubMenu
       key={route.path}
@@ -57,27 +57,25 @@ const createSubMenuComponents = (route, pathname, history) => {
   );
 };
 // 侧边路由子集处理
-const routerChild = (routes) => {
-  return routes.forEach((item) => {
-    if (item.children) {
-      const childLen = item.children.filter(child => { return !child.hidden; }).length;
-      switch (childLen) {
+const routerChild = (routes) => routes.forEach((item) => {
+  if (item.children) {
+    const childLen = item.children.filter(child => !child.hidden).length;
+    switch (childLen) {
       // 没有一个子菜单要显示
-        case 0:
-          item.showChild = false;
-          break;
+      case 0:
+        item.showChild = false;
+        break;
         // 只有一个子菜单要显示
-        case 1:
-          item.showChild = false;
-          break;
-        default:
-          item.showChild = true;
-          break;
-      }
-      routerChild(item.children);
+      case 1:
+        item.showChild = false;
+        break;
+      default:
+        item.showChild = true;
+        break;
     }
-  }); 
-};
+    routerChild(item.children);
+  }
+});
 routerChild(routes);
 // console.log(routes);
 const selectedRouter = (pathname, routes, parent) => {
@@ -143,7 +141,7 @@ class SlideBar extends Component {
           defaultOpenKeys={[...menuArray]}
         >
           {
-            routes.filter(route => { return !route.hidden && handleFilter(route.permission) && route.layout; }).map((item) => {
+            routes.filter(route => !route.hidden && handleFilter(route.permission) && route.layout).map((item) => {
               if (!item.showChild) {
                 if (item.children) {
                   return (
@@ -172,7 +170,7 @@ class SlideBar extends Component {
     );
   }
 }
-const mapStateToProps = state => { return state; };
+const mapStateToProps = state => state;
 // const mapDispatchToProps = dispatch => ({
 //   setCollapse: data => {
 //     dispatch(setCollapse(data));

@@ -42,7 +42,7 @@ class Swiper extends React.Component {
     clearInterval(this.state.timer);
   }
   changeSwiper() {
-    const checkedIndex = this.state.swiperList.findIndex(item => { return item.checked; }) + 1;
+    const checkedIndex = this.state.swiperList.findIndex(item => item.checked) + 1;
     const { swiperList } = this.state;
     swiperList.forEach(item => {
       item.checked = false;
@@ -53,16 +53,12 @@ class Swiper extends React.Component {
       swiperList[checkedIndex].checked = true;
     }
    
-    this.setState(() => {
-      return { swiperList };
-    });
+    this.setState(() => ({ swiperList }));
   }
   render() {
     return (
       <div className="container">
-        {this.state.swiperList.map(item => {
-          return <input type="radio" name="slides" key={item.id} id={`slide${item.id}`} checked={item.checked} />;
-        })}
+        {this.state.swiperList.map(item => <input type="radio" name="slides" key={item.id} id={`slide${item.id}`} checked={item.checked} />)}
         <div className="slider">
           <div className="captions">
             <div className="c1">ルキア</div>

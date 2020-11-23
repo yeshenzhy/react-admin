@@ -10,67 +10,20 @@ import Swiper from './Swiper';
 
 import './Login.scss';
 
-const Register = (props) => {
-  return (
-    props.isRegister 
-      ? (
-        <Form onSubmit={props.handleSubmit} className="login-form">
-          <Form.Item>
-            {props.getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入昵称！' }],
-            })(
-              <Input
-                prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="请输入昵称"
-              />,
-            )}
-          </Form.Item>
-          <Form.Item>
-            {props.getFieldDecorator('mobile', {
-              rules: [{ required: true, message: '请输入手机号！' }],
-            })(
-              <Input
-                prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="请输入手机号"
-              />,
-            )}
-          </Form.Item>
-          <Form.Item>
-            {props.getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码！' }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="请输入密码"
-              />,
-            )}
-          </Form.Item>
-          <Form.Item>
-            {props.getFieldDecorator('passwordAgain', {
-              rules: [{ required: true, message: '请再次输入密码！' }],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="请再次输入密码"
-              />,
-            )}
-          </Form.Item>
-          <Form.Item>
-            <Button className="btn-login" type="primary" htmlType="submit" block onClick={props.register}>
-              注册
-            </Button>
-          </Form.Item>    
-        </Form>
-
-      ) : null
-  );
-};
-const Login = (props) => {
-  return (
-    !props.isRegister ? (
+const Register = (props) => (
+  props.isRegister 
+    ? (
       <Form onSubmit={props.handleSubmit} className="login-form">
+        <Form.Item>
+          {props.getFieldDecorator('name', {
+            rules: [{ required: true, message: '请输入昵称！' }],
+          })(
+            <Input
+              prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="请输入昵称"
+            />,
+          )}
+        </Form.Item>
         <Form.Item>
           {props.getFieldDecorator('mobile', {
             rules: [{ required: true, message: '请输入手机号！' }],
@@ -93,14 +46,57 @@ const Login = (props) => {
           )}
         </Form.Item>
         <Form.Item>
-          <Button className="btn-login" type="primary" htmlType="submit" block onClick={props.login}>
-            登录
+          {props.getFieldDecorator('passwordAgain', {
+            rules: [{ required: true, message: '请再次输入密码！' }],
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="请再次输入密码"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          <Button className="btn-login" type="primary" htmlType="submit" block onClick={props.register}>
+              注册
           </Button>
         </Form.Item>    
       </Form>
+
     ) : null
-  );
-};
+);
+const Login = (props) => (
+  !props.isRegister ? (
+    <Form onSubmit={props.handleSubmit} className="login-form">
+      <Form.Item>
+        {props.getFieldDecorator('mobile', {
+          rules: [{ required: true, message: '请输入手机号！' }],
+        })(
+          <Input
+            prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="请输入手机号"
+          />,
+        )}
+      </Form.Item>
+      <Form.Item>
+        {props.getFieldDecorator('password', {
+          rules: [{ required: true, message: '请输入密码！' }],
+        })(
+          <Input
+            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            type="password"
+            placeholder="请输入密码"
+          />,
+        )}
+      </Form.Item>
+      <Form.Item>
+        <Button className="btn-login" type="primary" htmlType="submit" block onClick={props.login}>
+            登录
+        </Button>
+      </Form.Item>    
+    </Form>
+  ) : null
+);
 class LoginComponent extends React.Component {
   constructor(props) {
     super(props);

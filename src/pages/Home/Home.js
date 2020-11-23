@@ -62,7 +62,7 @@ class Home extends React.Component {
   }
   // 测试
   test() {
-    testApi({}).then(res => { return console.log(res); });
+    testApi({}).then(res => console.log(res));
   }
   render() {
     const obj = urlParams(this.props.location.search);

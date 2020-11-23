@@ -81,7 +81,7 @@ class TopHeader extends React.Component {
               />
             </div>
             <div className="dropdown-wrap" id="dropdown-wrap" style={{ cursor: 'pointer' }}>
-              <Dropdown getPopupContainer={() => { return document.getElementById('dropdown-wrap'); }} overlay={DropdownList}>
+              <Dropdown getPopupContainer={() => document.getElementById('dropdown-wrap')} overlay={DropdownList}>
                 <div>
                   <Avatar size="large" icon="user" src={this.state.userInfo.avatar} />
                   <Icon style={{ color: 'rgba(0,0,0,.3)', cursor: 'pointer' }} type="caret-down" />
@@ -95,14 +95,10 @@ class TopHeader extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return state;
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    setCollapse: data => {
-      dispatch(setCollapse(data));
-    },
-  };
-};
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => ({
+  setCollapse: data => {
+    dispatch(setCollapse(data));
+  },
+});
 export default connect(mapStateToProps, mapDispatchToProps)(TopHeader);

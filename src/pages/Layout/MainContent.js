@@ -16,15 +16,15 @@ const handleFilter = permission => {
 };
 const RouteComponent = route => {
   if (route.children) {
-    return (route.children.map(item => { return (RouteComponent(item)); }));
+    return (route.children.map(item => (RouteComponent(item))));
   }
   if (handleFilter(route.permission)) {
-    return (<Route exact render={() => { return <route.component />; }} key={route.path} path={route.path} />
+    return (<Route exact render={() => <route.component />} key={route.path} path={route.path} />
     ); 
   }
 };
 // 路由表渲染
-const renderRouteComponent = routes => { return routes.map(route => { return (RouteComponent(route)); }); };
+const renderRouteComponent = routes => routes.map(route => (RouteComponent(route)));
 
 @withRouter
 class MainContent extends React.Component {
@@ -43,6 +43,6 @@ class MainContent extends React.Component {
   } 
 }
 
-const mapStateToProps = state => { return { userInfo: state.userInfo }; };
+const mapStateToProps = state => ({ userInfo: state.userInfo });
 export default withRouter(connect(mapStateToProps)(MainContent));
 

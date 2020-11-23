@@ -12,7 +12,7 @@ module.exports = {
   rules: {
 
     "camelcase": [1, {"properties": "never"}],
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": ["error", "as-needed"],
     "no-underscore-dangle": 0,
     "no-useless-constructor": 0,
     "func-names": ["error", "never"],

@@ -10,7 +10,7 @@ class Syntax extends Component {
   render() {
     const list = ['a', 'b', 'c', 'zhy', 'xhz', 'lyx'];
 
-    const dom = list.map((item, index) => { return (<li data={list} key={index}>{item}</li>); }) || '';
+    const dom = list.map((item, index) => (<li data={list} key={index}>{item}</li>)) || '';
 
     console.log(this.props);
     return (
