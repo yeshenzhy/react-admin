@@ -23,7 +23,7 @@ const props = {
   onChange(info) {
     const { status, response } = info.file;
     if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
+      // console.log(info.file, info.fileList);
     }
     if (status === 'done') {
       console.log(String(response.data.url), 'zzz');
