@@ -10,7 +10,7 @@ module.exports = {
     es6: true
   },
   rules: {
-
+    "react/jsx-one-expression-per-line": 'off',
     "camelcase": [1, {"properties": "never"}],
     "arrow-body-style": ["error", "as-needed"],
     "no-underscore-dangle": 0,
@@ -58,6 +58,7 @@ module.exports = {
     "react/button-has-type": 0,
     "react/self-closing-comp": 0,
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "object-curly-newline": ["error", { "multiline": true }],
     "react/prop-types": 0,
     "react/destructuring-assignment": 0,
     "react/sort-comp": 0,

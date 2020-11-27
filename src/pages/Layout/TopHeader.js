@@ -1,13 +1,11 @@
 import React from 'react';
-import {
-  Icon, Avatar, Dropdown, Menu, 
-} from 'antd';
-import { connect } from 'react-redux';
+import { Icon, Avatar, Dropdown, Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
 import emitter from '@src/utils/bus';
-import { setCollapse } from '../../redux/actions/setting';
+import { inject } from 'mobx-react';
 
 @withRouter
+@inject('AppState')
 class TopHeader extends React.Component {
   constructor() {
     super();
@@ -22,19 +20,15 @@ class TopHeader extends React.Component {
     // 声明一个自定义事件
     // 在组件装载完成以后
     this.eventEmitter = emitter.addListener('updateUserInfo', this.updateUser.bind(this));
-    this.setState({
-      userInfo,
-    });
+    this.setState({ userInfo });
   }
   // 更新用户信息
   updateUser(userInfo) {
-    this.setState({
-      userInfo,
-    });
+    this.setState({ userInfo });
   }
   // 导航侧边栏折叠
   toggle() {
-    this.props.setCollapse({ isCollapsed: !this.props.collapse.isCollapsed });
+    this.props.AppState.setCollapse();
   }
   // 头部设置
   setting() {}
@@ -65,7 +59,8 @@ class TopHeader extends React.Component {
         <div className="top-header-inner">
           <Icon
             className="trigger"
-            type={this.props.collapse.isCollapsed ? 'menu-unfold' : 'menu-fold'}
+            // type={this.props.collapse.isCollapsed ? 'menu-unfold' : 'menu-fold'}
+            type="menu-unfold"
             onClick={this.toggle}
           />
           <div className="header-title">React-antd-admin 通用后台管理系统</div>
@@ -95,10 +90,11 @@ class TopHeader extends React.Component {
   }
 }
 
-const mapStateToProps = state => state;
-const mapDispatchToProps = dispatch => ({
-  setCollapse: data => {
-    dispatch(setCollapse(data));
-  },
-});
-export default connect(mapStateToProps, mapDispatchToProps)(TopHeader);
+// const mapStateToProps = state => state;
+// const mapDispatchToProps = dispatch => ({
+//   setCollapse: data => {
+//     dispatch(setCollapse(data));
+//   },
+// });
+// export default connect(mapStateToProps, mapDispatchToProps)(TopHeader);
+export default TopHeader;

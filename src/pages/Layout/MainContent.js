@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  Redirect, withRouter, Route, Switch, 
-} from 'react-router-dom';
+import { Redirect, withRouter, Route, Switch } from 'react-router-dom';
 import allRoutes from '@src/router/routerMap';
-import { connect } from 'react-redux';
 import { Layout } from 'antd';
 
 const { Content } = Layout;
@@ -43,6 +40,5 @@ class MainContent extends React.Component {
   } 
 }
 
-const mapStateToProps = state => ({ userInfo: state.userInfo });
-export default withRouter(connect(mapStateToProps)(MainContent));
+export default MainContent;
 

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import routes from '@src/router/routerMap';
-import { connect } from 'react-redux';
+import { observer, inject } from 'mobx-react';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
-// import connect from '@connect';
+
 // 判断路由权限
 const handleFilter = permission => {
   // 过滤没有权限的页面TODO:
@@ -77,7 +77,7 @@ const routerChild = (routes) => routes.forEach((item) => {
   }
 });
 routerChild(routes);
-// console.log(routes);
+
 const selectedRouter = (pathname, routes, parent) => {
   for (let i = 0; i < routes.length; i++) {
     if (routes[i].path === pathname) {
@@ -89,19 +89,17 @@ const selectedRouter = (pathname, routes, parent) => {
     }
   }
 };
-// @connect
+
 @withRouter
+@inject('AppState')
+@observer
 class SlideBar extends Component {
   onOpenChange = (openKeys) => {
     this.props.setOpenKeys([openKeys.pop()]);
   }
   render() {
-    // const {
-    //   openkeys, breadCrumbs, collapsed, routes,
-    // } = this.props.appReducer;
-    // const { location: { pathname }, history } = this.props;
     // 路由初始化处理
-    const { collapse } = this.props;
+    const { AppState: { collapse } } = this.props;
     let menuSelected;
     const selectItem = selectedRouter(this.props.history.location.pathname, routes);
     if (selectItem) {
@@ -127,7 +125,7 @@ class SlideBar extends Component {
       <Sider
         className="app-sider"
         // collapsible
-        collapsed={collapse.isCollapsed}
+        collapsed={collapse}
       >
         <div className="logo" style={{ color: 'white' }}>
           Logo
@@ -170,12 +168,6 @@ class SlideBar extends Component {
     );
   }
 }
-const mapStateToProps = state => state;
-// const mapDispatchToProps = dispatch => ({
-//   setCollapse: data => {
-//     dispatch(setCollapse(data));
-//   },
-// });
-export default connect(mapStateToProps)(SlideBar);
-// export default SlideBar;
+
+export default SlideBar;
 

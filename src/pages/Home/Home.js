@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Button, Upload, Icon, message, 
-} from 'antd';
-
+import { Button, Upload, Icon, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { urlParams } from '@src/utils/tools';
 import { testApi } from '@src/api/homeApi';
@@ -12,9 +9,7 @@ const { Dragger } = Upload;
 const props = {
   name: 'file',
   multiple: false,
-  headers: {
-    Authorization: localStorage.getItem('token') ? `${'Bearer '}${JSON.parse(localStorage.getItem('token'))}` : '',
-  },
+  headers: { Authorization: localStorage.getItem('token') ? `${'Bearer '}${JSON.parse(localStorage.getItem('token'))}` : '' },
   action: 'http://service.yeshen1.cn/api/v1/upload',
   showUploadList: false,
   beforeUpload() {

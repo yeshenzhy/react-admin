@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Button, Form, Input, Icon, message, Switch,
-} from 'antd';
+import { Button, Form, Input, Icon, message, Switch } from 'antd';
 import { loginApi, registerApi } from '@src/api/homeApi';
 import imgBeian from '@src/assets/static/flag.png';
 
@@ -15,9 +13,7 @@ const Register = (props) => (
     ? (
       <Form onSubmit={props.handleSubmit} className="login-form">
         <Form.Item>
-          {props.getFieldDecorator('name', {
-            rules: [{ required: true, message: '请输入昵称！' }],
-          })(
+          {props.getFieldDecorator('name', { rules: [{ required: true, message: '请输入昵称！' }] })(
             <Input
               prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="请输入昵称"
@@ -25,9 +21,7 @@ const Register = (props) => (
           )}
         </Form.Item>
         <Form.Item>
-          {props.getFieldDecorator('mobile', {
-            rules: [{ required: true, message: '请输入手机号！' }],
-          })(
+          {props.getFieldDecorator('mobile', { rules: [{ required: true, message: '请输入手机号！' }] })(
             <Input
               prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="请输入手机号"
@@ -35,9 +29,7 @@ const Register = (props) => (
           )}
         </Form.Item>
         <Form.Item>
-          {props.getFieldDecorator('password', {
-            rules: [{ required: true, message: '请输入密码！' }],
-          })(
+          {props.getFieldDecorator('password', { rules: [{ required: true, message: '请输入密码！' }] })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
@@ -46,9 +38,7 @@ const Register = (props) => (
           )}
         </Form.Item>
         <Form.Item>
-          {props.getFieldDecorator('passwordAgain', {
-            rules: [{ required: true, message: '请再次输入密码！' }],
-          })(
+          {props.getFieldDecorator('passwordAgain', { rules: [{ required: true, message: '请再次输入密码！' }] })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
@@ -69,9 +59,7 @@ const Login = (props) => (
   !props.isRegister ? (
     <Form onSubmit={props.handleSubmit} className="login-form">
       <Form.Item>
-        {props.getFieldDecorator('mobile', {
-          rules: [{ required: true, message: '请输入手机号！' }],
-        })(
+        {props.getFieldDecorator('mobile', { rules: [{ required: true, message: '请输入手机号！' }] })(
           <Input
             prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder="请输入手机号"
@@ -79,9 +67,7 @@ const Login = (props) => (
         )}
       </Form.Item>
       <Form.Item>
-        {props.getFieldDecorator('password', {
-          rules: [{ required: true, message: '请输入密码！' }],
-        })(
+        {props.getFieldDecorator('password', { rules: [{ required: true, message: '请输入密码！' }] })(
           <Input
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="password"
@@ -109,30 +95,22 @@ class LoginComponent extends React.Component {
     const box = document.getElementById('form');
     const bo = box.getBoundingClientRect().top;
     console.log(bo, 'zz');
-    this.setState({
-      bottom: `-${bo - 6}px`,
-    });
+    this.setState({ bottom: `-${bo - 6}px` });
     this.init();
   }
   // 初始化
   init() {
-    this.setState({
-      isRegister: false,
-    });
+    this.setState({ isRegister: false });
     localStorage.removeItem('userInfo');
   }
   // 切换登录/注册
   switchRegister() {
-    this.setState({
-      isRegister: !this.state.isRegister,
-    });
+    this.setState({ isRegister: !this.state.isRegister });
     this.props.form.resetFields();
   }
   // 切换风格
   switchStyle() {
-    this.setState({
-      isStar: !this.state.isStar,
-    });
+    this.setState({ isStar: !this.state.isStar });
   }
   // 登录
   login(e) {
