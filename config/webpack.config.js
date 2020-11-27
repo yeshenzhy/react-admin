@@ -37,7 +37,14 @@ const config = {
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           { loader: 'css-loader' },
           { loader: 'postcss-loader' },
-          { loader: 'less-loader' },
+          {
+            loader: 'less-loader', 
+            options: {
+              sourceMap: true,
+              modifyVars: { '@primary-color': '#1890ff' }, // 修改antd主题色
+              javascriptEnabled: true,
+            }, 
+          },
         ],
       },
       {
@@ -87,9 +94,7 @@ const config = {
   ],
   resolve: {
     extensions: [' ', '.js', '.jsx', '.json'],
-    alias: {
-      '@src': path.resolve(__dirname, '../src'),
-    },
+    alias: { '@src': path.resolve(__dirname, '../src') },
   },
   
 };

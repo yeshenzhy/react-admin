@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react';
 import { configure } from 'mobx';
 import Router from './router';
 import './assets/css/common.scss';
-import './assets/css/app.scss';
+import './assets/css/app.less';
 import store from './store/index';
 
 ReactDOM.render(

@@ -124,6 +124,7 @@ class SlideBar extends Component {
     return (
       <Sider
         className="app-sider"
+        style={{ backgroundColor: 'rgb(48, 65, 86)' }}
         // collapsible
         collapsed={collapse}
       >

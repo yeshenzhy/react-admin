@@ -10,9 +10,7 @@ module.exports = merge(common, {
   mode: 'production',
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: './css/[name].[hash].css',
-    }),
+    new MiniCssExtractPlugin({ filename: './css/[name].[hash].css' }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g, // 一个正则表达式，指示应优化\最小化的资产的名称。提供的正则表达式针对配置中ExtractTextPlugin实例导出的文件的文件名运行，而不是源CSS文件的文件名。默认为/\.css$/g
       cssProcessor: require('cssnano'), // 用于优化\最小化CSS的CSS处理器，默认为cssnano。这应该是一个跟随cssnano.process接口的函数（接收CSS和选项参数并返回一个Promise）。
@@ -38,9 +36,7 @@ module.exports = merge(common, {
         sourceMap: true,
         
         uglifyOptions: {
-          output: {
-            comments: false, // 删掉所有注释
-          },
+          output: { comments: false }, // 删掉所有注释
           warnings: false, // 这里的warnings一定的提出来不然会报错`warning` is not a supported option
           compress: {
             // warning: false, // 这个得注释掉
