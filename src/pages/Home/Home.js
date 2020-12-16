@@ -79,7 +79,7 @@ class BlurExample extends React.Component {
     // 来帮助我们。
     return (
       <div
-        onBlur={() => this.onBlurHandler(111)}
+        onBlur={() => this.onBlurHandler(222)}
         onFocus={this.onFocusHandler}
       >
         <button
