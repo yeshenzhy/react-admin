@@ -47,7 +47,59 @@ class UploadImg extends React.Component {
     );
   }
 }
+class BlurExample extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props, 'zzz');
+    this.state = { isOpen: false };
+    this.timeOutId = null;
 
+    this.onClickHandler = this.onClickHandler.bind(this);
+    // this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onFocusHandler = this.onFocusHandler.bind(this);
+  }
+  onClickHandler() {
+    this.setState(data => {
+      console.log(data, 'zz');
+      return { isOpen: !data.isOpen };
+    });
+  }
+  onBlurHandler(val) {
+    console.log(val, this, 'blur');
+    this.timeOutId = setTimeout(() => {
+      this.setState({ isOpen: false });
+    });
+  }
+  onFocusHandler() {
+    console.log('focus');
+    clearTimeout(this.timeOutId);
+  }
+  render() {
+    // React 通过把失去焦点和获得焦点事件传输给父节点
+    // 来帮助我们。
+    return (
+      <div
+        onBlur={() => this.onBlurHandler(111)}
+        onFocus={this.onFocusHandler}
+      >
+        <button
+          onClick={this.onClickHandler}
+          aria-haspopup="true"
+          aria-expanded={this.state.isOpen}
+        >
+          Select an option
+        </button>
+        {this.state.isOpen && (
+          <ul>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 3</li>
+          </ul>
+        )}
+      </div>
+    );
+  }
+}
 @withRouter 
 class Home extends React.Component {
   componentDidMount() {
@@ -66,6 +118,7 @@ class Home extends React.Component {
       <div>
         <Button type="primary" onClick={this.test}>Primary</Button>
         <UploadImg></UploadImg>
+        <BlurExample name="zhy"></BlurExample>
       </div>
     );
   }
