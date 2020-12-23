@@ -1,0 +1,30 @@
+{
+  "id": "2286432",
+  "name": "yeshen",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3526089",
+      "name": "神",
+      "font_class": "shen",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "7212128",
+      "name": "logo",
+      "font_class": "logo",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "522611",
+      "name": "夜",
+      "font_class": "ye",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    }
+  ]
+}

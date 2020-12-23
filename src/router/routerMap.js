@@ -31,13 +31,28 @@ const routes = [
     redirect: '/knowLedge/syntax',
     children: [
       {
-        path: '/knowLedge/syntax',
-        component: asyncComponens('KnowLedge/Syntax'),
-        name: '常用语法',
-        permission: 1, // 2表示无权限
+        path: '/knowLedge/syntax/list',
+        component: asyncComponens('KnowLedge/ChildChild'),
+        name: 'ChildChild',
         layout: true,
       },
+      {
+        path: '/knowLedge/syntax/detail',
+        component: asyncComponens('KnowLedge/MyCycle'),
+        name: '我的',
+        layout: true,
+        permission: 1
+      }
     ]
+    // children: [
+    //   {
+    //     path: '/knowLedge/syntax',
+    //     component: asyncComponens('KnowLedge/Syntax'),
+    //     name: '常用语法',
+    //     permission: 1, // 2表示无权限
+    //     layout: true,
+    //   },
+    // ]
   },
 ];
 

@@ -6,12 +6,11 @@ import { observer, inject } from 'mobx-react';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
-
 // 判断路由权限
 const handleFilter = permission => {
   // 过滤没有权限的页面TODO:
-  const roleType = localStorage.getItem('userInfo') || 1;
-  if (!permission || permission === roleType) return true;
+  // const roleType = localStorage.getItem('userInfo') || 1;
+  if (!permission || permission === 1) return true;
   return false;
 };
 // 递归循环侧边导航
@@ -129,7 +128,8 @@ class SlideBar extends Component {
         collapsed={collapse}
       >
         <div className="logo" style={{ color: 'white' }}>
-          Logo
+          <span className="iconfont icon-ye" style={{ color: '#FF9900', fontSize: '35px' }}></span>
+          <span className="iconfont icon-shen" style={{ color: '#CC3333', fontSize: '35px' }}></span>
         </div>
         <Menu
 

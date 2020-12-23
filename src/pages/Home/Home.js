@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Upload, Icon, message } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { urlParams } from '@src/utils/tools';
+// import { urlParams } from '@src/utils/tools';
 import { testApi } from '@src/api/homeApi';
 import emitter from '@src/utils/bus';
 
@@ -47,62 +47,55 @@ class UploadImg extends React.Component {
     );
   }
 }
+@withRouter
 class BlurExample extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props, 'zzz');
-    this.state = { isOpen: false };
-    this.timeOutId = null;
-
-    this.onClickHandler = this.onClickHandler.bind(this);
-    // this.onBlurHandler = this.onBlurHandler.bind(this);
-    this.onFocusHandler = this.onFocusHandler.bind(this);
   }
-  onClickHandler() {
-    this.setState(data => {
-      console.log(data, 'zz');
-      return { isOpen: !data.isOpen };
-    });
-  }
-  onBlurHandler(val) {
-    console.log(val, this, 'blur');
-    this.timeOutId = setTimeout(() => {
-      this.setState({ isOpen: false });
-    });
-  }
-  onFocusHandler() {
-    console.log('focus');
-    clearTimeout(this.timeOutId);
+  changeVal(val, val1, e) {
+    console.log(val, val1, e.target, 'zvv');
+    this.props.changeVal(val);
   }
   render() {
     // React 通过把失去焦点和获得焦点事件传输给父节点
     // 来帮助我们。
     return (
-      <div
-        onBlur={() => this.onBlurHandler(222)}
-        onFocus={this.onFocusHandler}
-      >
-        <button
-          onClick={this.onClickHandler}
-          aria-haspopup="true"
-          aria-expanded={this.state.isOpen}
-        >
-          Select an option
-        </button>
-        {this.state.isOpen && (
-          <ul>
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
-          </ul>
-        )}
+      <div>
+        <p onClick={this.changeVal.bind(this, 'tom', 'zhy')}>我的名字{this.props.name}</p>
       </div>
     );
   }
 }
+
+const Example = () => {
+  // 声明一个新的叫做 “count” 的 state 变量
+  const [count, setCount] = useState({
+    name: 'tom',
+    age: 18,
+  });
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prev) => ({ ...prev, age: ++prev.age }));
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  });
+  return (
+    <div>
+      <p>name: {count.name}</p>
+      <p>age: {count.age}</p>
+      <button onClick={() => setCount()}>
+        Click me
+      </button>
+    </div>
+  );
+};
 @withRouter 
 class Home extends React.Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'zhy' };
   }
   goNext() {
     this.props.history.push({ pathname: '/knowLedge/syntax' });
@@ -111,14 +104,19 @@ class Home extends React.Component {
   test() {
     testApi({}).then(res => console.log(res));
   }
+  changeVal(val, e) {
+    console.log(val, e, 'zzz');
+    this.setState({ name: val });
+  }
   render() {
-    const obj = urlParams(this.props.location.search);
-    console.log(obj);
+    // const obj = urlParams(this.props.location.search);
+    
     return (
       <div>
         <Button type="primary" onClick={this.test}>Primary</Button>
         <UploadImg></UploadImg>
-        <BlurExample name="zhy"></BlurExample>
+        <BlurExample name={this.state.name} changeVal={this.changeVal.bind(this)}></BlurExample>
+        <Example></Example>
       </div>
     );
   }

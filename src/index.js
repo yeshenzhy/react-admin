@@ -5,6 +5,7 @@ import { configure } from 'mobx';
 import Router from './router';
 import './assets/css/common.scss';
 import './assets/css/app.less';
+import './assets/iconfont/iconfont.css';
 import store from './store/index';
 
 ReactDOM.render(

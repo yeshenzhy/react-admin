@@ -8,6 +8,7 @@ const { Content } = Layout;
 const handleFilter = permission => {
   // 过滤没有权限的页面TODO:
   const roleType = 1;
+  console.log(!permission || permission === roleType, 'zz');
   if (!permission || permission === roleType) return true;
   return false;
 };
