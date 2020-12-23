@@ -3,13 +3,15 @@ import { Icon, Avatar, Dropdown, Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
 import emitter from '@src/utils/bus';
 import { inject } from 'mobx-react';
+import routes from '@src/router/routerMap';
 
 @withRouter
 @inject('AppState')
 class TopHeader extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.toggle = this.toggle.bind(this);
+    this.state = { titleName: '' };
   }
   // 组件销毁前移除事件监听
   componentWillUnmount() {
@@ -21,6 +23,24 @@ class TopHeader extends React.Component {
     // 在组件装载完成以后
     this.eventEmitter = emitter.addListener('updateUserInfo', this.updateUser.bind(this));
     this.setState({ userInfo });
+    this.changeTitle(routes);
+  }
+  componentDidUpdate() {
+    this.changeTitle(routes);
+  }
+  // 改变选中导航的标题
+  changeTitle(routes) {
+    console.log(this.props);
+    const nowRouter = routes.find(e => e.path === this.props.location.pathname);
+    if (!nowRouter) {
+      const r = routes.find(e => this.props.location.pathname.indexOf(e.path) > -1);
+      if (r.children) {
+        this.changeTitle(r.children);
+      }
+    } else {
+      if (this.state.titleName === nowRouter.name) return;
+      this.setState({ titleName: nowRouter.name }); 
+    }
   }
   // 更新用户信息
   updateUser(userInfo) {
@@ -63,7 +83,7 @@ class TopHeader extends React.Component {
             type="menu-unfold"
             onClick={this.toggle}
           />
-          <div className="header-title">React-antd-admin 通用后台管理系统</div>
+          <div className="header-title">{this.state.titleName}</div>
           <div className="header-right">
             <div className="full-screen">
               {/* <FullScreen /> */}
