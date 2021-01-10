@@ -30,7 +30,7 @@ class TopHeader extends React.Component {
   }
   // 改变选中导航的标题
   changeTitle(routes) {
-    console.log(this.props);
+    if (this.props.location.pathname === '/') return;
     const nowRouter = routes.find(e => e.path === this.props.location.pathname);
     if (!nowRouter) {
       const r = routes.find(e => this.props.location.pathname.indexOf(e.path) > -1);
