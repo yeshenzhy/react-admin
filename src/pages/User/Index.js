@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, Row, Col, Icon, Upload, message } from 'antd';
 import { withRouter } from 'react-router-dom';
+import { observer, inject } from 'mobx-react';
 import './index.scss';
-import emitter from '@src/utils/bus';
 
-const UploadAvatar = () => {
+let myAvatar = '';
+const UploadAvatar = ({ avatarData }) => {
   const [uploadResult, setUploadResult] = useState({ loading: false, imgUrl: '' });
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -28,9 +29,7 @@ const UploadAvatar = () => {
         setUploadResult((prev) => ({ ...prev, loading: true }));
       }
       if (status === 'done') {
-        const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
-        userInfo.avatar = response.data.url; 
-        emitter.emit('updateUserInfo', userInfo);
+        avatarData.uploadSuccess(response.data.url);
         message.success('图片上传成功');
         getBase64(info.file.originFileObj, imgUrl => setUploadResult({ imgUrl, loading: false }));
       } else if (status === 'error') {
@@ -45,6 +44,9 @@ const UploadAvatar = () => {
       <div className="ant-upload-text">上传头像</div>
     </div>
   );
+  useEffect(() => {
+    avatarData.avatar ? setUploadResult({ imgUrl: avatarData.avatar, loading: false }) : null;
+  }, []);
   return (
     <div className="avatar-upload">
       <Upload {...props}>
@@ -56,6 +58,7 @@ const UploadAvatar = () => {
 
 const UserCenter = (props) => {
   const { getFieldDecorator } = props.form;
+  const { userInfo: { name, mobile, avatar, password, confirm } } = props.AppState;
   const [confirmDirty, setConfirmDirty] = useState(false);
   const formItemLayout = {
     labelCol: {
@@ -79,6 +82,20 @@ const UserCenter = (props) => {
       },
     },
   };
+  // 表单默认数据
+  const defaultData = {
+    nick: name,
+    mobile,
+    myAvatar: '',
+    avatarData: {
+      avatar,
+      uploadSuccess: (data) => {
+        myAvatar = data;
+      }, 
+    },
+    password,
+    confirm,
+  };
   // 自定义密码校验
   const validateToNextPassword = (rule, value, callback) => {
     const { form } = props;
@@ -96,33 +113,23 @@ const UserCenter = (props) => {
       callback();
     }
   };
-  // 提交表单
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.form.validateFieldsAndScroll((err, values) => {
-      console.log(values, '1111');
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
   // 表单数去焦点
   const handleConfirmBlur = e => {
     const { value } = e.target;
     setConfirmDirty((prev) => prev || !!value);
   };
   // 表单配置项
-  const formConfig = () => [
+  const formConfig = ({ nick, avatarData, mobile, password, confirm }) => [
     { 
       itemOptions: { label: '用户头像', extra: '点击头像上传图片' },
       initialValue: '', 
       rules: [],
       name: '',
-      children: <UploadAvatar></UploadAvatar>, 
+      children: <UploadAvatar avatarData={avatarData}></UploadAvatar>, 
     },
     { 
       itemOptions: { label: '用户昵称', hasFeedback: true },
-      initialValue: '夜神', 
+      initialValue: nick, 
       rules: [
         {
           required: true,
@@ -135,14 +142,14 @@ const UserCenter = (props) => {
     },
     { 
       itemOptions: { label: '用户手机号', extra: '用户手机号不可修改' },
-      initialValue: '18345456789', 
+      initialValue: mobile, 
       rules: [],
       name: 'mobile',
       children: <Input disabled />, 
     },
     { 
       itemOptions: { label: '用户登录密码', hasFeedback: true },
-      initialValue: '', 
+      initialValue: password, 
       rules: [
         {
           required: true,
@@ -160,7 +167,7 @@ const UserCenter = (props) => {
     },
     { 
       itemOptions: { label: '再次确认密码', hasFeedback: true },
-      initialValue: '', 
+      initialValue: confirm, 
       rules: [
         {
           required: true,
@@ -172,17 +179,28 @@ const UserCenter = (props) => {
       children: <Input.Password placeholder="请输入再次确认密码" onBlur={handleConfirmBlur} />,
     },
   ];
+  
+  // 提交表单
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        // console.log(values, '1111');
+        const data = { ...values, avatar: myAvatar };
+        console.log(data, '222');
+      }
+    });
+  };
   return (
     <Row>
       <Col span={12}>
         <Form {...formItemLayout} onSubmit={handleSubmit} className="user-center">
-          {formConfig().map(({ itemOptions, children, name, rules, initialValue }, i) => (
+          {formConfig(defaultData).map(({ itemOptions, children, name, rules, initialValue }, i) => (
             <Form.Item {...itemOptions} key={i}>
               { name ? getFieldDecorator(name, { rules, initialValue })(children) : children}
             </Form.Item>
           ))}
           <Form.Item {...tailFormItemLayout}>
-            <Button className="mar-r-10">取消</Button>
             <Button type="primary" htmlType="submit">保存</Button>
           </Form.Item>
         </Form>
@@ -191,4 +209,5 @@ const UserCenter = (props) => {
   );
 };
 const WrappedForm = Form.create({ name: 'user' })(UserCenter);
-export default withRouter(WrappedForm);
+export default withRouter(inject('AppState')(observer(WrappedForm)));
+
