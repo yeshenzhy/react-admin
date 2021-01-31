@@ -8,9 +8,9 @@ const registerApi = (data) => $axios('regUser', {
   method: 'POST',
   data,
 });
-const testApi = (data) => $axios('test', {
+const userEditApi = (data) => $axios('user-edit', {
   method: 'POST',
   data,
 });
 
-export { loginApi, registerApi, testApi };
+export { loginApi, registerApi, userEditApi };

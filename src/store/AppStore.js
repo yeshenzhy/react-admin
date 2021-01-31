@@ -11,8 +11,8 @@ class AppState {
   // 用户信息
   @observable userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
   @action
-  setUserInfo() {
-    this.userInfo = localStorage.getItem('userInfo') || {};
+  setUserInfo(data) {
+    this.userInfo = data || {};
   }
 }
 

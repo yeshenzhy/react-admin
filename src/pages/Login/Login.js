@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, Input, Icon, message, Switch } from 'antd';
 import { loginApi, registerApi } from '@src/api/homeApi';
 import imgBeian from '@src/assets/static/flag.png';
-
+import { inject } from 'mobx-react';
 import Canvas from './Canvas';
 import Swiper from './Swiper';
 
@@ -55,6 +55,7 @@ const Register = (props) => (
 
     ) : null
 );
+
 const Login = (props) => (
   !props.isRegister ? (
     <Form onSubmit={props.handleSubmit} className="login-form">
@@ -83,6 +84,7 @@ const Login = (props) => (
     </Form>
   ) : null
 );
+@inject('AppState')
 class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -122,6 +124,7 @@ class LoginComponent extends React.Component {
             message.success(res.msg, () => {
               localStorage.setItem('userInfo', JSON.stringify(res.data));
               localStorage.setItem('token', JSON.stringify(res.token));
+              this.props.AppState.setUserInfo(res.data);
               this.props.history.replace({ pathname: '/home' });
             });
           });

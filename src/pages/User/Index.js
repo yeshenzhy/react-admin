@@ -3,6 +3,7 @@ import { Button, Form, Input, Row, Col, Icon, Upload, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 import './index.scss';
+import { userEditApi } from '@src/api/homeApi';
 
 let myAvatar = '';
 const UploadAvatar = ({ avatarData }) => {
@@ -58,7 +59,7 @@ const UploadAvatar = ({ avatarData }) => {
 
 const UserCenter = (props) => {
   const { getFieldDecorator } = props.form;
-  const { userInfo: { name, mobile, avatar, password, confirm } } = props.AppState;
+  const { userInfo: { name, mobile, avatar, password } } = props.AppState;
   const [confirmDirty, setConfirmDirty] = useState(false);
   const formItemLayout = {
     labelCol: {
@@ -86,7 +87,6 @@ const UserCenter = (props) => {
   const defaultData = {
     nick: name,
     mobile,
-    myAvatar: '',
     avatarData: {
       avatar,
       uploadSuccess: (data) => {
@@ -94,8 +94,11 @@ const UserCenter = (props) => {
       }, 
     },
     password,
-    confirm,
+    confirm: password,
   };
+  useEffect(() => {
+    myAvatar = avatar;
+  }, []);
   // 自定义密码校验
   const validateToNextPassword = (rule, value, callback) => {
     const { form } = props;
@@ -133,8 +136,12 @@ const UserCenter = (props) => {
       rules: [
         {
           required: true,
-          max: 8,
           message: '请输入用户昵称',
+        },
+        {
+          required: true,
+          max: 8,
+          message: '用户昵称最多八位',
         },
       ],
       name: 'nick',
@@ -183,10 +190,16 @@ const UserCenter = (props) => {
   // 提交表单
   const handleSubmit = e => {
     e.preventDefault();
-    props.form.validateFieldsAndScroll((err, values) => {
+    props.form.validateFieldsAndScroll((err, { nick, password }) => {
       if (!err) {
-        // console.log(values, '1111');
-        const data = { ...values, avatar: myAvatar };
+        const data = { name: nick, avatar: myAvatar, password };
+        userEditApi(data).then(() => {
+          message.error('修改用户信息后请重新登录', () => {
+            props.history.replace({ pathname: '/login' });
+          });
+        }).catch(err => {
+          console.log(err);
+        });
         console.log(data, '222');
       }
     });
