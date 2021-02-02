@@ -25,7 +25,7 @@ const props = {
       const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
       userInfo.avatar = response.data.url; 
       emitter.emit('updateUserInfo', userInfo);
-      message.success('图片上传成功');
+      message.success('图片上传成功！');
     } else if (status === 'error') {
       message.error('图片上传失败');
     }
