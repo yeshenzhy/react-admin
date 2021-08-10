@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Upload, Icon, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 // import { urlParams } from '@src/utils/tools';
-import { testApi } from '@src/api/homeApi';
+// import { testApi } from '@src/api/homeApi';
 import emitter from '@src/utils/bus';
 
 const { Dragger } = Upload;
@@ -40,7 +40,7 @@ class UploadImg extends React.Component {
         </p>
         <p className="ant-upload-text">点击我我</p>
         <p className="ant-upload-hint">
-      Support
+          Support
         </p>
       </Dragger>
     );
@@ -101,7 +101,7 @@ class Home extends React.Component {
   }
   // 测试
   test() {
-    testApi({}).then(res => console.log(res));
+    // testApi({}).then(res => console.log(res));
   }
   changeVal(val, e) {
     console.log(val, e, 'zzz');

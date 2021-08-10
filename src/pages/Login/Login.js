@@ -48,7 +48,7 @@ const Register = (props) => (
         </Form.Item>
         <Form.Item>
           <Button className="btn-login" type="primary" htmlType="submit" block onClick={props.register}>
-              注册
+            注册
           </Button>
         </Form.Item>    
       </Form>
@@ -78,7 +78,7 @@ const Login = (props) => (
       </Form.Item>
       <Form.Item>
         <Button className="btn-login" type="primary" htmlType="submit" block onClick={props.login}>
-            登录
+          登录
         </Button>
       </Form.Item>    
     </Form>

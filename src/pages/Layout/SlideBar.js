@@ -132,7 +132,6 @@ class SlideBar extends Component {
           <span className="iconfont icon-shen" style={{ color: '#CC3333', fontSize: '35px' }}></span>
         </div>
         <Menu
-
           mode="inline"
           theme="dark"
           defaultSelectedKeys={[menuSelected]}
