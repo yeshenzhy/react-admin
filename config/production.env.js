@@ -1,5 +1,5 @@
 module.exports = {
   NODE_ENV: '"production"',
   ENV_CONFIG: '"prod"',
-  BASE_API: 'http://service.yeshen1.cn/api/v1',
+  BASE_API: 'http://119.45.237.84:5678/api/v1',
 };
