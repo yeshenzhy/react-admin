@@ -38,7 +38,7 @@ class UploadImg extends React.Component {
         <p className="ant-upload-drag-icon">
           <Icon type="inbox" />
         </p>
-        <p className="ant-upload-text">点击我我</p>
+        <p className="ant-upload-text">点击我我11</p>
         <p className="ant-upload-hint">
           Support
         </p>
